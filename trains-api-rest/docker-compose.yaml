@@ -1,0 +1,23 @@
+services:
+  trains-api:
+    image: trains-api
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongoadmin:secret@mongodb:27017/trains-db?authSource=admin
+    container_name: trains-api
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    volumes:
+      - /tmp/mongodata:/data/db
+    container_name: mongodb
