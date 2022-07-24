@@ -1,1 +1,3 @@
 /.idea/
+/trains-api-model/target/
+/trains-api-rest/target/
